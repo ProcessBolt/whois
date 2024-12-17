@@ -36,12 +36,12 @@ namespace Whois.Net
             return tcpClient.Connected;
         }
 
-        private async Task Write(string content)
+        private void Write(string content)
         {
             try
             {
-                await writer.WriteLineAsync(content);
-                await writer.FlushAsync();
+                writer.WriteLine(content);
+                writer.FlushAsync();
             }
             catch (Exception ex)
             {
@@ -49,17 +49,19 @@ namespace Whois.Net
             }
         }
 
-        private async Task Read(StringBuilder sb)
+        private void Read(StringBuilder sb)
         {
             try
             {
-                var response = await reader.ReadLineAsync();
+                //var response = await reader.ReadLineAsync();
+                var response = reader.ReadLine();
 
                 while (response != null)
                 {
                     sb.AppendLine(response);
 
-                    response = await reader.ReadLineAsync();
+                    //response = await reader.ReadLineAsync();
+                    response = reader.ReadLine();
                 }
             }
             catch (Exception ex)
@@ -92,9 +94,9 @@ namespace Whois.Net
 
                 if (connected)
                 {
-                    await Write(command);
+                    Write(command);
 
-                    await Read(sb);
+                    Read(sb);
                 }
             }
             finally
@@ -125,6 +127,8 @@ namespace Whois.Net
 #endif
             reader?.Dispose();
             writer?.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }
