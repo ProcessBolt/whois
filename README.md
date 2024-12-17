@@ -2,7 +2,7 @@
 ============================
 [![GitHub Stars](https://img.shields.io/github/stars/flipbit/whois.svg)](https://github.com/flipbit/whois/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/flipbit/whois.svg)](https://github.com/flipbit/whois/issues) [![NuGet Version](https://img.shields.io/nuget/v/whois.svg)](https://www.nuget.org/packages/Whois/) [![NuGet Downloads](https://img.shields.io/nuget/dt/whois.svg)](https://www.nuget.org/packages/Whois/) 
 
-Query and parse WHOIS domain registration information with this library for .NET Standard 2.0 and .NET Framework 4.5.2.
+Query and parse WHOIS domain registration information with this library for .NET 8.
 
 ```csharp
 // Create a WhoisLookup instance
