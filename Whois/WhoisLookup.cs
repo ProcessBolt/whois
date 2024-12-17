@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tokens.Transformers;
 using Tokens.Validators;
-using Whois.Logging;
+//using Whois.Logging;
 using Whois.Net;
 using Whois.Parsers;
 using Whois.Servers;
@@ -15,7 +15,7 @@ namespace Whois
     /// </summary>
     public class WhoisLookup : IWhoisLookup
     {
-        private static readonly ILog Log = LogProvider.GetCurrentClassLogger();
+        //private static readonly ILog Log = LogProvider.GetCurrentClassLogger();
         
         /// <summary>
         /// The default <see cref="WhoisOptions"/> to use for this instance
@@ -113,7 +113,7 @@ namespace Whois
             }
 
             // Trim leading '.'
-            if (request.Query.StartsWith(".")) request.Query = request.Query.Substring(1);
+            if (request.Query.StartsWith('.')) request.Query = request.Query[1..];
 
             // Validate domain name
             if (HostName.TryParse(request.Query, out var hostName) == false)
@@ -121,7 +121,7 @@ namespace Whois
                 throw new WhoisException($"WHOIS Query Format Error: {request.Query}");
             }
 
-            Log.Debug("Looking up WHOIS response for: {0}", hostName.Value);
+            //Log.Debug("Looking up WHOIS response for: {0}", hostName.Value);
 
             // Set our starting point
             WhoisResponse response;
@@ -187,7 +187,7 @@ namespace Whois
 
             var content = await TcpReader.Read(url, 43, query, request.Encoding, request.TimeoutSeconds);
 
-            Log.Debug("Lookup {0}: Downloaded {1:###,###,##0} byte(s) from {2}.", request.Query, content.Length, url);
+            //Log.Debug("Lookup {0}: Downloaded {1:###,###,##0} byte(s) from {2}.", request.Query, content.Length, url);
 
             return content;
         }
@@ -195,6 +195,7 @@ namespace Whois
         public void Dispose()
         {
             TcpReader?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

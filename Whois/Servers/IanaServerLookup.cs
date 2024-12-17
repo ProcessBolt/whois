@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Tokens;
-using Whois.Logging;
+//using Whois.Logging;
 using Whois.Net;
 using Whois.Parsers;
 
@@ -14,7 +14,7 @@ namespace Whois.Servers
     {
         private const string IanaUrl = "whois.iana.org";
         
-        private static readonly ILog Log = LogProvider.GetCurrentClassLogger();
+        //private static readonly ILog Log = LogProvider.GetCurrentClassLogger();
 
         private readonly Lazy<TokenMatcher> ianaTemplate;
         private readonly ResourceReader resourceReader;
@@ -73,11 +73,11 @@ namespace Whois.Servers
 
         private async Task<string> Download(string tld, WhoisRequest request)
         {
-            Log.Debug("Looking up Root TLD server for {0} from {1}", tld, IanaUrl);
+            //Log.Debug("Looking up Root TLD server for {0} from {1}", tld, IanaUrl);
 
             var response = await TcpReader.Read(IanaUrl, 43, tld.ToUpper(), request.Encoding, request.TimeoutSeconds);
 
-            Log.Debug("Received {0:###,###,##0} byte(s).", response.Length);
+            //Log.Debug("Received {0:###,###,##0} byte(s).", response.Length);
 
             return response;
         }
@@ -100,7 +100,7 @@ namespace Whois.Servers
             return matcher;
         }
 
-        private string GetTld(string domain)
+        private static string GetTld(string domain)
         {
             var tld = domain;
 
@@ -108,7 +108,7 @@ namespace Whois.Servers
             {
                 var parts = domain.Split('.');
 
-                if (parts.Length > 1) tld = parts[parts.Length - 1];
+                if (parts.Length > 1) tld = parts[^1];
             }
 
             return tld;
@@ -117,6 +117,7 @@ namespace Whois.Servers
         public void Dispose()
         {
             TcpReader?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

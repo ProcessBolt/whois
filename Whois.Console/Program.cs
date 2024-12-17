@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommandLine;
 using Newtonsoft.Json;
-using Serilog;
+//using Serilog;
 
 namespace Whois
 {
@@ -18,6 +18,7 @@ namespace Whois
         /// <param name="args">The args.</param>
         private static async Task Main(string[] args)
         {
+            /*
             var log = new LoggerConfiguration()
                 .WriteTo
                 .Console(outputTemplate: "{Timestamp:HH:mm} [{Level}] {Message}{NewLine}{Exception}")
@@ -26,6 +27,7 @@ namespace Whois
                 .CreateLogger();
 
             Log.Logger = log;
+            */
 
             var result = Parser
                 .Default
