@@ -1,6 +1,5 @@
 .NET WHOIS Lookup and Parser
 ============================
-[![GitHub Stars](https://img.shields.io/github/stars/flipbit/whois.svg)](https://github.com/flipbit/whois/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/flipbit/whois.svg)](https://github.com/flipbit/whois/issues) [![NuGet Version](https://img.shields.io/nuget/v/whois.svg)](https://www.nuget.org/packages/Whois/) [![NuGet Downloads](https://img.shields.io/nuget/dt/whois.svg)](https://www.nuget.org/packages/Whois/) 
 
 Query and parse WHOIS domain registration information with this library for .NET 8.
 
@@ -139,15 +138,3 @@ lookup.TcpReader = new MyCustomTcpReader();
 // Lookups will now use the custom TcpReader
 var response = lookup.Lookup("github.com");
 ```
-
-### Installation
-
-You can install the library via the NuGet GUI or by entering the following command into the Package Manager Console:
-
-    Install-Package Whois
-    
-The source code is available on Github and can be downloaded and compiled.
-
-### Further Reading
-
-Further details about how the library works can be found on [this blog post](http://flipbit.co.uk/2009/06/querying-whois-server-data-with-c.html).
